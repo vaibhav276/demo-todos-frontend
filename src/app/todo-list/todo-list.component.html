@@ -1,1 +1,18 @@
-<p>todo-list works!</p>
+<div>
+    <div class="text-3xl">Overdue</div>
+    <app-todo-list-item *ngFor="let todo of this.overdueTodos" [todo]="todo"
+        (selectEvent)="selectTodo($event)"></app-todo-list-item>
+
+    <div class="text-3xl">Today</div>
+    <app-todo-list-item *ngFor="let todo of this.todaysTodos" [todo]="todo"
+        (selectEvent)="selectTodo($event)"></app-todo-list-item>
+
+    <div class="text-3xl">Tomorrow</div>
+    <app-todo-list-item *ngFor="let todo of this.tomorrowsTodos" [todo]="todo"
+        (selectEvent)="selectTodo($event)"></app-todo-list-item>
+
+    <div class="text-3xl">Later</div>
+    <app-todo-list-item *ngFor="let todo of this.laterTodos" [todo]="todo"
+        (selectEvent)="selectTodo($event)"></app-todo-list-item>
+
+</div>

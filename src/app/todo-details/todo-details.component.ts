@@ -11,4 +11,5 @@ import { CommonModule } from '@angular/common';
 })
 export class TodoDetailsComponent {
   @Input() todo!: Todo;
+  @Input() creating: boolean = false;
 }

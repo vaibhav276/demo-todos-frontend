@@ -8,8 +8,7 @@ export class TodoService {
 
   constructor() { }
 
-
-  overdue: Todo[] = [
+  todos: Todo[] = [
     {
       id: '01HY053FQRAMBR3STSPPHAMCA0',
       title: 'Quit the day job',
@@ -17,9 +16,6 @@ export class TodoService {
       due_date: new Date('2024-01-30'),
       done: false
     },
-  ];
-
-  today: Todo[] = [
     {
       id: '01HY053FQRAMBR3STSPPHAMCA0',
       title: 'Build angular project',
@@ -27,9 +23,27 @@ export class TodoService {
       due_date: new Date('2024-05-17'),
       done: false
     },
-  ];
-
-  later: Todo[] = [
+    {
+      id: '01HY053FQRAMBR3STSPPHAMCA0',
+      title: 'Build serverless project',
+      description: '',
+      due_date: new Date('2024-05-18'),
+      done: false
+    },
+    {
+      id: '01HY053FQRAMBR3STSPPHAMCA0',
+      title: 'Build golang project',
+      description: '',
+      due_date: new Date('2024-05-18'),
+      done: false
+    },
+    {
+      id: '01HY053FQRAMBR3STSPPHAMCA0',
+      title: 'Build spring boot project',
+      description: '',
+      due_date: new Date('2024-05-17'),
+      done: false
+    },
     {
       id: '01HY053FQRAMBR3STSPPHAMCA0',
       title: 'Decide on career style',
@@ -53,43 +67,7 @@ export class TodoService {
     },
   ]
 
-  tomorrow: Todo[] = [
-    {
-      id: '01HY053FQRAMBR3STSPPHAMCA0',
-      title: 'Build serverless project',
-      description: '',
-      due_date: new Date('2024-05-18'),
-      done: false
-    },
-    {
-      id: '01HY053FQRAMBR3STSPPHAMCA0',
-      title: 'Build golang project',
-      description: '',
-      due_date: new Date('2024-05-18'),
-      done: false
-    },
-    {
-      id: '01HY053FQRAMBR3STSPPHAMCA0',
-      title: 'Build spring boot project',
-      description: '',
-      due_date: new Date('2024-05-17'),
-      done: false
-    },
-  ];
-
-  getOverdue(): Todo[] {
-    return this.overdue;
-  }
-
-  getToday(): Todo[] {
-    return this.today;
-  }
-
-  getTomorrow(): Todo[] {
-    return this.tomorrow;
-  }
-
-  getLater(): Todo[] {
-    return this.later;
+  getTodos(): Todo[] {
+    return this.todos;
   }
 }
