@@ -3,13 +3,13 @@ import { Todo } from '../todo';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-todoitem',
+  selector: 'app-todo-list-item',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './todoitem.component.html',
-  styleUrl: './todoitem.component.css'
+  templateUrl: './todo-list-item.component.html',
+  styleUrl: './todo-list-item.component.css'
 })
-export class TodoitemComponent {
+export class TodoListItemComponent {
   @Input() todo!: Todo;
   @Output() selectEvent = new EventEmitter<Todo>();
 

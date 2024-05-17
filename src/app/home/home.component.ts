@@ -1,14 +1,18 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TodoitemComponent } from '../todoitem/todoitem.component';
+import { TodoListItemComponent } from '../todo-list-item/todo-list-item.component';
 import { Todo } from '../todo';
 import { TodoService } from '../todo.service';
-import { TododetailsComponent } from '../tododetails/tododetails.component';
+import { TodoDetailsComponent } from '../todo-details/todo-details.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, TodoitemComponent, TododetailsComponent],
+  imports: [
+    CommonModule,
+    TodoListItemComponent, 
+    TodoDetailsComponent
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

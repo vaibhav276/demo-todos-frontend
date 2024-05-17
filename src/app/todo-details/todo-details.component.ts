@@ -3,12 +3,12 @@ import { Todo } from '../todo';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-tododetails',
+  selector: 'app-todo-details',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './tododetails.component.html',
-  styleUrl: './tododetails.component.css'
+  templateUrl: './todo-details.component.html',
+  styleUrl: './todo-details.component.css'
 })
-export class TododetailsComponent {
+export class TodoDetailsComponent {
   @Input() todo!: Todo;
 }
