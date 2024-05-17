@@ -1,7 +1,12 @@
 export interface Todo {
-    id: string,
+    todo_id: string,
     title: string,
     description: string,
     due_date: Date,
     done: boolean
+}
+
+export interface TodoList {
+    count: number,
+    todos: Todo[]
 }

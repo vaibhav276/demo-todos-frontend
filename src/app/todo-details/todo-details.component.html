@@ -2,25 +2,36 @@
     <div class="p-6">
         <div class="mb-2">
             <div class="flex justify-stretch">
-                <input type="text" name="title" id="title" value="{{ todo.title }}" onclick="this.select();"
-                class="text-3xl text-blue-600 w-full mr-2">
+                <input type="text" name="title" id="title"
+                class="text-3xl text-blue-600 w-full mr-2"
+                value="{{ todo.title }}" onclick="this.select();"
+                [(ngModel)]="todo.title"
+                >
                     <div *ngIf="creating; then thenBlock else elseBlock"></div>
                     <ng-template #thenBlock>
-                        <button class="rounded-lg bg-blue-100 border-2 border-blue-600 px-4 py-2">Create</button>
+                        <button class="rounded-lg bg-blue-100 border-2 border-blue-600 px-4 py-2"
+                        (click)="createTodo()"
+                        >Create</button>
                     </ng-template>
                     <ng-template #elseBlock>
-                        <button class="rounded-lg border-2 border-blue-600 text-blue-600 px-4 py-2">Update</button>
+                        <button class="rounded-lg border-2 border-blue-600 text-blue-600 px-4 py-2"
+                        (click)="updateTodo()"
+                        >Update</button>
                     </ng-template>
             </div>
         </div>
         <div class="mb-6">
             <label for="due_date" class="text-2xl text-gray-500 mr-2">Due by</label>
-            <input type="text" name="due_date" id="due_date" value="{{ todo.due_date | date }}" onclick="this.select();"
+            <input type="text" name="due_date" id="due_date" 
+            value="{{ todo.due_date | date:'shortDate' }}" onclick="this.select();"
+            [(ngModel)]="todo.due_date"
                 class="text-lg">
         </div>
         <div>
             <textarea name="description" rows="4" cols="50" id="description" onclick="this.select();"
-                class="text-xl shadow-inner w-full" value="{{ todo.description }}"></textarea>
+                class="text-xl shadow-inner w-full" value="{{ todo.description }}"
+                [(ngModel)]="todo.description"
+                ></textarea>
         </div>
     </div>
 </div>
