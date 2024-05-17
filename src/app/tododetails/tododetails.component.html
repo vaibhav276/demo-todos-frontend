@@ -1,0 +1,8 @@
+<div class="rounded-md m-6 bg-white border-solid border-2 border-blue-600 fixed">
+    <div class="p-6">
+        <div class="text-3xl text-blue-600 mb-2"> {{ todo.title }} </div>
+        <div class="text-2xl text-gray-500 mb-2"> Due by: <span class="text-lg">{{ todo.due_date | date }}</span> </div>
+        <div class="text-xl mb-2"> {{ todo.description }} </div>
+    
+    </div>
+</div>

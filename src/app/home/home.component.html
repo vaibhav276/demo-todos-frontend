@@ -1,0 +1,19 @@
+<div class="grid grid-cols-2 gap-4">
+  <div>
+    <div class="text-3xl">Overdue</div>
+    <app-todoitem *ngFor="let todo of this.overdueTodos" [todo]="todo"></app-todoitem>
+
+    <div class="text-3xl">Today</div>
+    <app-todoitem *ngFor="let todo of this.todayTodos" [todo]="todo"></app-todoitem>
+
+    <div class="text-3xl">Tomorrow</div>
+    <app-todoitem *ngFor="let todo of this.tomorrowTodos" [todo]="todo"></app-todoitem>
+
+    <div class="text-3xl">Later</div>
+    <app-todoitem *ngFor="let todo of this.laterTodos" [todo]="todo"></app-todoitem>
+
+  </div>
+  <div class="container w-3/4">
+    <app-tododetails [todo]="testTodo"></app-tododetails>
+  </div>
+</div>
