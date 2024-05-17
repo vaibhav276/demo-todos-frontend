@@ -19,18 +19,37 @@ export class HomeComponent {
   tomorrowTodos: Todo[] = [];
   laterTodos: Todo[] = [];
 
-  testTodo: Todo = {
-    id: '01HY053FQRAMBR3STSPPHAMCA0',
-    title: 'Test todo with a very long title',
-    description: 'Test description dfkldjklf asldf asldkfjasldf aslkdf \n\n ksdfkdj k askdfhdk',
-    due_date: new Date('2024-05-31'),
+  selectedTodo!: Todo;
+
+  blankTodo: Todo = {
+    id: '',
+    title: 'Something new',
+    description: 'Description of the awesomeness...',
+    due_date: new Date(),
     done: false
-  }
+  };
+
+  editing: boolean = true;
+  creating: boolean = false;
 
   constructor() {
     this.overdueTodos = this.todoService.getOverdue();
     this.todayTodos = this.todoService.getToday();
     this.tomorrowTodos = this.todoService.getTomorrow();
     this.laterTodos = this.todoService.getLater();
+
+    this.initCreationFlow();
+  }
+
+  selectTodo(todo: Todo) {
+    this.selectedTodo = todo;
+    this.editing = true;
+    this.creating = false;
+  }
+
+  initCreationFlow() {
+    this.selectedTodo = this.blankTodo;
+    this.editing = false;
+    this.creating = true;
   }
 }
