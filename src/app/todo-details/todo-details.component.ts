@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, inject } from '@angular/core';
 import { Todo } from '../todo';
+import { TodoDto } from '../todo-dto';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TodoMapperService } from '../todo-mapper.service';
 
 @Component({
   selector: 'app-todo-details',
@@ -13,14 +15,29 @@ import { FormsModule } from '@angular/forms';
 export class TodoDetailsComponent {
   @Input() todo!: Todo;
   @Input() creating: boolean = false;
-  @Output() creationEvent = new EventEmitter<Todo>();
-  @Output() updationEvent = new EventEmitter<Todo>();
+  @Output() creationEvent = new EventEmitter<TodoDto>();
+  @Output() updationEvent = new EventEmitter<TodoDto>();
+  @Output() deletionEvent = new EventEmitter<String>();
+
+  todoMapperService: TodoMapperService = inject(TodoMapperService);
+  todoDto: TodoDto = { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.todo = changes['todo'].currentValue;
+    this.todoDto = this.todoMapperService.mapToDto(this.todo, this.todoDto);
+  }
 
   createTodo() {
-    this.creationEvent.emit(this.todo);
+    this.todoDto.todo_id = undefined;
+    this.creationEvent.emit(this.todoDto);
   }
 
   updateTodo() {
-    this.updationEvent.emit(this.todo);
+    this.todo = this.todoMapperService.mapToModel(this.todoDto, this.todo);
+    this.updationEvent.emit(this.todoDto);
+  }
+
+  deleteTodo() {
+    this.deletionEvent.emit(this.todoDto.todo_id);
   }
 }

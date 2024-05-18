@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Todo } from '../todo';
 import { TodoService } from '../todo.service';
 import { TodoDetailsComponent } from '../todo-details/todo-details.component';
 import { TodoListComponent } from '../todo-list/todo-list.component';
+import { TodoDto } from '../todo-dto';
 
 @Component({
   selector: 'app-home',
@@ -40,11 +41,6 @@ export class HomeComponent {
   }
 
   getTodos(): void {
-    // this.todoService.getTodos()
-    //   .subscribe(data => {
-    //     this.todos = data.todos
-    //   });
-
     this.todoService.getTodos().subscribe(data => {
       this.todos = [];
       for (let t of data.todos) {
@@ -69,17 +65,23 @@ export class HomeComponent {
     this.creating = true;
   }
 
-  updateTodo(todo: Todo) {
-    todo.due_date = new Date(todo.due_date); // Because its a string from the input
-    this.todoService.updateTodo(todo)
+  updateTodo(todoDto: TodoDto) {
+    this.todoService.updateTodo(todoDto)
       .subscribe(data => {
         this.selectedTodo = data;
+        this.getTodos();
       })
   }
-  createTodo(todo: Todo) {
-    this.todoService.createTodo(todo)
+  createTodo(todoDto: TodoDto) {
+    this.todoService.createTodo(todoDto)
       .subscribe(data => {
-        this.todos.push(data);
+        this.getTodos();
+      })
+  }
+  deleteTodo(todo_id: String) {
+    this.todoService.deleteTodo(todo_id)
+      .subscribe(_ => {
+        this.getTodos();
       })
   }
 }

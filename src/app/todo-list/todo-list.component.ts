@@ -49,6 +49,10 @@ export class TodoListComponent implements OnChanges {
     dayAfter.setHours(0, 0, 0, 0);
     dayAfter.setDate(tomorrow.getDate() + 1);
 
+    this.overdueTodos = [];
+    this.todaysTodos = [];
+    this.tomorrowsTodos = [];
+    this.laterTodos = [];
     for(let item of this.todos) {
       if (item.due_date < today) {
         this.overdueTodos.push(item);

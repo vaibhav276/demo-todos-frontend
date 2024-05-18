@@ -4,8 +4,8 @@
             <div class="flex justify-stretch">
                 <input type="text" name="title" id="title"
                 class="text-3xl text-blue-600 w-full mr-2"
-                value="{{ todo.title }}" onclick="this.select();"
-                [(ngModel)]="todo.title"
+                value="{{ todoDto.title }}" onclick="this.select();"
+                [(ngModel)]="todoDto.title"
                 >
                     <div *ngIf="creating; then thenBlock else elseBlock"></div>
                     <ng-template #thenBlock>
@@ -14,23 +14,25 @@
                         >Create</button>
                     </ng-template>
                     <ng-template #elseBlock>
-                        <button class="rounded-lg border-2 border-blue-600 text-blue-600 px-4 py-2"
+                        <button class="rounded-lg border-2 border-blue-600 text-blue-600 px-4 py-2 mr-2"
                         (click)="updateTodo()"
                         >Update</button>
+                        <button class="rounded-lg border-2 border-red-600 text-red-600 px-4 py-2" 
+                        (click)="deleteTodo()">Delete</button>
                     </ng-template>
             </div>
         </div>
         <div class="mb-6">
             <label for="due_date" class="text-2xl text-gray-500 mr-2">Due by</label>
-            <input type="text" name="due_date" id="due_date" 
-            value="{{ todo.due_date | date:'shortDate' }}" onclick="this.select();"
-            [(ngModel)]="todo.due_date"
+            <input type="datetime-local" name="due_date" id="due_date" 
+            value="{{ todoDto.due_date }}" onclick="this.select();"
+            [(ngModel)]="todoDto.due_date"
                 class="text-lg">
         </div>
         <div>
             <textarea name="description" rows="4" cols="50" id="description" onclick="this.select();"
                 class="text-xl shadow-inner w-full" value="{{ todo.description }}"
-                [(ngModel)]="todo.description"
+                [(ngModel)]="todoDto.description"
                 ></textarea>
         </div>
     </div>

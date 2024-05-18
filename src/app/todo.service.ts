@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Todo, TodoList } from './todo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { TodoDto } from './todo-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -85,7 +86,7 @@ export class TodoService {
     );
   }
 
-  updateTodo(todo: Todo): Observable<Todo> {
+  updateTodo(todoDto: TodoDto): Observable<Todo> {
     // todo: Remove hardcode
     const options = {
       headers: {
@@ -95,14 +96,14 @@ export class TodoService {
     };
 
     return this.http.patch<Todo>(
-      this.serverUrl + '/todo/t/' + todo.todo_id,
-      JSON.stringify(todo),
+      this.serverUrl + '/todo/t/' + todoDto.todo_id,
+      JSON.stringify(todoDto),
       options
     );
 
   }
 
-  createTodo(todo: Todo): Observable<Todo> {
+  createTodo(todoDto: TodoDto): Observable<Todo> {
     // todo: Remove hardcode
     const options = {
       headers: {
@@ -113,9 +114,24 @@ export class TodoService {
 
     return this.http.post<Todo>(
       this.serverUrl + '/todos',
-      JSON.stringify(todo),
+      JSON.stringify(todoDto),
       options
     );
 
+  }
+
+  deleteTodo(todo_id: String): Observable<any> {
+    // todo: Remove hardcode
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+        'user_id': 'U1234'
+      }
+    }
+
+    return this.http.delete(
+      this.serverUrl + '/todo/t/' + todo_id,
+      options
+    );
   }
 }
