@@ -4,7 +4,7 @@
   </div>
   <div class="container w-3/4">
     <button class="rounded-lg bg-blue-500 text-white p-4 mb-4 fixed" (click)="initCreationFlow()">+ Add New</button>
-    <app-todo-details [todo]="selectedTodo" [creating]="creating" 
+    <app-todo-details *ngIf="selectedTodo" [todo]="selectedTodo" [creating]="creating" 
     (creationEvent)="createTodo($event)"
     (updationEvent)="updateTodo($event)"
     (deletionEvent)="deleteTodo($event)"

@@ -2,38 +2,32 @@
     <div class="p-6">
         <div class="mb-2">
             <div class="flex justify-stretch">
-                <input type="text" name="title" id="title"
-                class="text-3xl text-blue-600 w-full mr-2"
-                value="{{ todoDto.title }}" onclick="this.select();"
-                [(ngModel)]="todoDto.title"
-                >
-                    <div *ngIf="creating; then thenBlock else elseBlock"></div>
-                    <ng-template #thenBlock>
-                        <button class="rounded-lg bg-blue-100 border-2 border-blue-600 px-4 py-2"
-                        (click)="createTodo()"
-                        >Create</button>
-                    </ng-template>
-                    <ng-template #elseBlock>
-                        <button class="rounded-lg border-2 border-blue-600 text-blue-600 px-4 py-2 mr-2"
-                        (click)="updateTodo()"
-                        >Update</button>
-                        <button class="rounded-lg border-2 border-red-600 text-red-600 px-4 py-2" 
+                <input type="checkbox" name="done" id="done" [(ngModel)]="todoDto.done"
+                    class="h-12 w-12 mr-2 rounded-lg bg-white border-blue-300 text-blue-500 focus:ring-white">
+                <input type="text" name="title" id="title" class="text-3xl text-blue-600 w-full mr-2 border-none focus:ring-white"
+                    value="{{ todoDto.title }}" onclick="this.select();" [(ngModel)]="todoDto.title">
+                <div *ngIf="creating; then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock>
+                    <button class="rounded-lg bg-blue-100 border-2 border-blue-600 px-4 py-2"
+                        (click)="createTodo()">Create</button>
+                </ng-template>
+                <ng-template #elseBlock>
+                    <button class="rounded-lg border-2 border-blue-600 text-blue-600 px-4 py-2 mr-2"
+                        (click)="updateTodo()">Update</button>
+                    <button class="rounded-lg border-2 border-red-600 text-red-600 px-4 py-2"
                         (click)="deleteTodo()">Delete</button>
-                    </ng-template>
+                </ng-template>
             </div>
         </div>
         <div class="mb-6">
             <label for="due_date" class="text-2xl text-gray-500 mr-2">Due by</label>
-            <input type="datetime-local" name="due_date" id="due_date" 
-            value="{{ todoDto.due_date }}" onclick="this.select();"
-            [(ngModel)]="todoDto.due_date"
-                class="text-lg">
+            <input type="datetime-local" name="due_date" id="due_date" value="{{ todoDto.due_date }}"
+                onclick="this.select();" [(ngModel)]="todoDto.due_date" class="text-lg border-none focus:ring-white">
         </div>
         <div>
             <textarea name="description" rows="4" cols="50" id="description" onclick="this.select();"
-                class="text-xl shadow-inner w-full" value="{{ todo.description }}"
-                [(ngModel)]="todoDto.description"
-                ></textarea>
+                class="text-xl w-full border-none focus:ring-white" value="{{ todo.description }}"
+                [(ngModel)]="todoDto.description"></textarea>
         </div>
     </div>
 </div>

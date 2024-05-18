@@ -5,6 +5,7 @@ import { TodoService } from '../todo.service';
 import { TodoDetailsComponent } from '../todo-details/todo-details.component';
 import { TodoListComponent } from '../todo-list/todo-list.component';
 import { TodoDto } from '../todo-dto';
+import { DateUtilService } from '../date-util.service';
 
 @Component({
   selector: 'app-home',
@@ -20,13 +21,15 @@ import { TodoDto } from '../todo-dto';
 export class HomeComponent {
   todoService: TodoService = inject(TodoService);
   todos: Todo[] = [];
-  selectedTodo!: Todo;
+  selectedTodo?: Todo;
+
+  dateUtilService: DateUtilService = inject(DateUtilService);
 
   blankTodo: Todo = {
     todo_id: '',
     title: 'Something new',
     description: 'Description of the awesomeness...',
-    due_date: new Date(),
+    due_date: this.dateUtilService.getFutureDate(1),
     done: false
   };
 
@@ -68,19 +71,21 @@ export class HomeComponent {
   updateTodo(todoDto: TodoDto) {
     this.todoService.updateTodo(todoDto)
       .subscribe(data => {
-        this.selectedTodo = data;
+        this.selectedTodo = undefined;
         this.getTodos();
       })
   }
   createTodo(todoDto: TodoDto) {
     this.todoService.createTodo(todoDto)
-      .subscribe(data => {
+      .subscribe(_ => {
+        this.selectedTodo = undefined;
         this.getTodos();
       })
   }
   deleteTodo(todo_id: String) {
     this.todoService.deleteTodo(todo_id)
       .subscribe(_ => {
+        this.selectedTodo = undefined;
         this.getTodos();
       })
   }

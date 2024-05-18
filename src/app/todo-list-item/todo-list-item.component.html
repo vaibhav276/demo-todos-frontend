@@ -1,8 +1,7 @@
-<div class="rounded-md m-6 bg-white border-dashed border-2 border-blue-600 hover:border-solid"
+<div [ngClass]="todo.done ? 'bg-none border-none hover:border-blue-600 hover:border-dashed' : 'rounded-md bg-white border-white border-2 m-6 hover:border-blue-600 hover:border-dashed'" class=""
 (click)="selectTodo()"
 >
     <div class="px-6 py-3">
-        <!-- <input type="checkbox" class="inline w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" /> --> 
-        <div class="inline text-xl text-gray-900 pl-2">{{ todo.title }}</div>
+        <div [ngClass]="todo.done ? 'text-small line-through' : 'text-xl'" class="inline text-gray-900 pl-2">{{ todo.title }}</div>
     </div>
 </div>

@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Todo } from '../todo';
 import { TodoListItemComponent } from '../todo-list-item/todo-list-item.component';
+import { DateUtilService } from '../date-util.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -14,6 +15,8 @@ export class TodoListComponent implements OnChanges {
   @Input() todos!: Todo[];
   @Input() selectedTodo!: Todo;
   @Output() selectionEvent = new EventEmitter<Todo>();
+
+  dateUtilService: DateUtilService = inject(DateUtilService);
 
   overdueTodos: Todo[] = [];
   todaysTodos: Todo[] = [];
@@ -38,16 +41,9 @@ export class TodoListComponent implements OnChanges {
       return;
     }
 
-    let today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    let tomorrow = new Date();
-    tomorrow.setHours(0, 0, 0, 0);
-    tomorrow.setDate(today.getDate() + 1);
-
-    let dayAfter = new Date();
-    dayAfter.setHours(0, 0, 0, 0);
-    dayAfter.setDate(tomorrow.getDate() + 1);
+    let today = this.dateUtilService.getFutureDate(0);
+    let tomorrow = this.dateUtilService.getFutureDate(1);
+    let dayAfter = this.dateUtilService.getFutureDate(2);
 
     this.overdueTodos = [];
     this.todaysTodos = [];
@@ -55,7 +51,9 @@ export class TodoListComponent implements OnChanges {
     this.laterTodos = [];
     for(let item of this.todos) {
       if (item.due_date < today) {
-        this.overdueTodos.push(item);
+        if (!item.done) {
+          this.overdueTodos.push(item);
+        }
         continue;
       } else if (item.due_date < tomorrow) {
         this.todaysTodos.push(item);

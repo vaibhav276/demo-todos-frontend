@@ -2,13 +2,13 @@ import { Component, EventEmitter, Input, Output, SimpleChanges, inject } from '@
 import { Todo } from '../todo';
 import { TodoDto } from '../todo-dto';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodoMapperService } from '../todo-mapper.service';
 
 @Component({
   selector: 'app-todo-details',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './todo-details.component.html',
   styleUrl: './todo-details.component.css'
 })
